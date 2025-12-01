@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Survey</title>
+    <style>
+        body {
+            background: #0d0d0d;
+            color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #333;
+            color: white;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Seller Registration Survey</h2>
+        <form id="surveyForm">
+
+            <label>1. Your full name</label>
+            <input type="text" name="full_name" required>
+
+            <label>2. Business / shop name</label>
+            <input type="text" name="business_name" required>
+
+            <label>3. What do you sell?</label>
+            <input type="text" name="products" required>
+
+            <label>4. How long have you been selling?</label>
+            <select name="experience">
+                <option value="less than 3 months">Less than 3 months</option>
+                <option value="3-12 months">3-12 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="more than 2 years">More than 2 years</option>
+            </select>
+
+            <label>5. Where do you currently advertise your products?</label>
+            <input type="text" name="current_platforms" required>
+
+            <label>6. What challenges do you face when selling online?</label>
+            <textarea name="challenges"></textarea>
+
+            <label>7. How do customers contact you?</label>
+            <input type="text" name="customer_contact" required>
+
+            <label>8. Do you deliver products?</label>
+            <select name="delivery">
+                <option>No</option>
+                <option>Yes, locally</option>
+                <option>Yes, nationwide</option>
+            </select>
+
+            <label>9. Which payment methods do you accept?</label>
+            <input type="text" name="payment_methods" required>
+
+            <label>10. How often do you receive orders in a week?</label>
+            <input type="text" name="order_frequency" required>
+
+            <label>11. What type of customers do you target?</label>
+            <input type="text" name="target_customers" required>
+
+            <label>12. Would you like help reaching more customers?</label>
+            <select name="marketing_help">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <label>13. Do you use WhatsApp for selling?</label>
+            <select name="whatsapp_use">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <label>14. What is your biggest struggle with online selling?</label>
+            <textarea name="biggest_struggle"></textarea>
+
+            <label>15. What device do you use to manage your business?</label>
+            <select name="device">
+                <option>Phone</option>
+                <option>Laptop</option>
+                <option>Both</option>
+            </select>
+
+            <label>16. How comfortable are you with using new apps?</label>
+            <select name="comfort_level">
+                <option>Very comfortable</option>
+                <option>Comfortable</option>
+                <option>Not comfortable</option>
+            </select>
+
+            <label>17. What features would you want in a selling app?</label>
+            <textarea name="features"></textarea>
+
+            <label>18. Would you be interested in promoting your products inside the app?</label>
+            <select name="promotion_interest">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <label>19. How much do you usually earn per month from selling?</label>
+            <input type="text" name="monthly_income" required>
+
+            <label>20. Anything else you want us to know?</label>
+            <textarea name="extra_info"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+<script>
+let WEBHOOK_URL = "https://formspree.io/f/mayvlnrb";
+
+const form = document.getElementById("surveyForm");
+form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    alert("Your response has been submitted! Thank you.");
+    form.reset();
+});
+</script>
+</body>
+</html>
